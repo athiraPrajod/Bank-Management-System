@@ -39,5 +39,12 @@ public class HomePageController {
         return "redirect:/create_account";
     }
 
+    @GetMapping("/home")
+    public String home_new(@ModelAttribute("User") User user)
+    {
+        
+        return "redirect:/create_account";
+    }
+
 }
 
