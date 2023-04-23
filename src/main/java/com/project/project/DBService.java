@@ -61,11 +61,10 @@ public class DBService {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM acc_user WHERE accno = " + account_no);
+            ResultSet rs = stmt.executeQuery("SELECT * FROM acc_user WHERE accuser = " + account_no);
             // System.out.println("SELECT user FROM bank.user WHERE accuser = " + account_no);
             while(rs.next())
             {
-               
                 user.setAccount_no(rs.getInt("accuser"));
                 user.setPassword(rs.getString("pwduser"));
                 user.setDOB(rs.getDate("dobuser"));

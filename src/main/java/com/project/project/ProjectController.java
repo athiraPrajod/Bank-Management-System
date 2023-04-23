@@ -69,8 +69,8 @@ public class ProjectController {
     // System.out.println(user.getAadhar_no());
     // service.addUser(user.getPassword(), user.getDOB(), user.getpan_no(), user.getAadhar_no(), user.getPhone_no(), user.getUsername());
     service.addUser(user.getPassword(), user.getpan_no(), user.getAadhar_no(), user.getPhone_no(), user.getUsername());
-
-    return "signup";
+    return "redirect:/create_account";
+    //return "signup";
   }
 
 

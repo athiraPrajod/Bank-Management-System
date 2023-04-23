@@ -11,12 +11,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AccountController {
     private DBService service = DBService.getInstance();
 
-    @GetMapping("/create_account/{accno}")
-    public String create_account(@PathVariable String accno, Model model)
+    @GetMapping("/create_account")
+    public String create_account(Model model)//@PathVariable String accno, Model model)
     {
         Account account = new Account();
         model.addAttribute("account", account);
-        model.addAttribute("accno", accno);
+        //model.addAttribute("accno", accno);
         return "create_account";
     }
 

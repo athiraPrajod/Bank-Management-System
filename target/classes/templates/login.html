@@ -29,7 +29,7 @@
 <body class="text-center">
 <main class="form-signin">
     
-    <form action="#" th:action="@{/}" method="post" th:object="${User}">
+    <form th:action="@{/signup}" method="post" th:object="${User}">
       <h1 class="h3 mb-3 fw-normal" style="color:rgb(24, 187, 209);">Please Login</h1>
       <div class="form-floating">
         <input type="text" field="*{account_no}" class="form-control"  name= "account_no" id="account_no" placeholder="Account Number">

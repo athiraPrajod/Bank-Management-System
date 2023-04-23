@@ -10,12 +10,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 public class FDController {
     private DBService service = DBService.getInstance();
-    @GetMapping("/fd/{accno}")
-    public String fd(@PathVariable String accno, Model model)
+    //@GetMapping("/fd/{accno}")
+    @GetMapping("/fd")
+    public String fd( Model model)
     {
         FD fd = new FD();
         model.addAttribute("fd", fd);
-        model.addAttribute("accno", accno);
+        //model.addAttribute("accno", accno);
         return "FD";
     }
 
