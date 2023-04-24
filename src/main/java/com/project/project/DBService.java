@@ -11,28 +11,34 @@ import java.util.ArrayList;
 //All Database related operations happens here
 public class DBService {
 
-    private static DBService DBServiceInstance = new DBService() ;
+    private static DBService instance;
     
-    private DBService(){};
- 
-    public static DBService getInstance()
-    {
-        return DBServiceInstance;
+    private DBService() {
+        // private constructor to prevent external instantiation
     }
     
+    public static synchronized DBService getInstance() {
+        if (instance == null) {
+            instance = new DBService();
+        }
+        return instance;
+    }
     public ArrayList<User> getAllUsers()
     {
         ArrayList<User> users = new ArrayList<>();
         try {
             //Establish DB connection
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
             //Execute SQl Query
             Statement stmt = conn.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM bank.acc_user");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM bank.user");
+            System.out.println(rs);
+
             //Add users to collection and return collection
             while(rs.next())
             {
+        
                 User user = new User();
                 // String username = rs.getString("iduser");
                 // String password = rs.getString("pwduser");
@@ -43,8 +49,9 @@ public class DBService {
                 user.setAadhar_no(rs.getString("aadharuser"));
                 user.setUsername(rs.getString("nameuser"));
                 user.setPhone_no(rs.getString("phoneuser"));
-                // System.out.println(username + "\t" + password + "\n");
+            
                 users.add(user);
+        
             }
 
         } catch (Exception ex) {
@@ -59,7 +66,7 @@ public class DBService {
         User user = new User();    
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM acc_user WHERE accuser = " + account_no);
             // System.out.println("SELECT user FROM bank.user WHERE accuser = " + account_no);
@@ -87,7 +94,7 @@ public class DBService {
     {
         try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
             //Execute SQl Query
             PreparedStatement stmt = null;
             // System.out.println(password+dob+pan+aadhar+phone+name);
@@ -113,7 +120,7 @@ public class DBService {
     {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
             //Execute SQl Query
             PreparedStatement stmt = null;
             // System.out.println(password+dob+pan+aadhar+phone+name);
@@ -136,7 +143,7 @@ public class DBService {
         Account account = new Account();  
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM acc_user WHERE accuser = " + account_no);
             // System.out.println("SELECT user FROM bank.user WHERE accuser = " + account_no);
@@ -161,7 +168,7 @@ public class DBService {
     {
         try{
                 Class.forName("com.mysql.cj.jdbc.Driver");
-                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+                Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
                 //Execute SQl Query
                 PreparedStatement stmt = null;
                 // System.out.println(password+dob+pan+aadhar+phone+name);
@@ -182,7 +189,7 @@ public class DBService {
 {
     try{
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
             //Execute SQl Query
             PreparedStatement stmt = null;
             // System.out.println(password+dob+pan+aadhar+phone+name);
@@ -208,7 +215,7 @@ public Loan getloan(int account_no)
     try 
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM loan WHERE custid = " + account_no);
             while(rs.next())
@@ -235,7 +242,7 @@ public FD getfd(int account_no)
     try 
         {
             Class.forName("com.mysql.cj.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
             Statement stmt = conn.createStatement();
             ResultSet rs = stmt.executeQuery("SELECT * FROM fd WHERE custid = " + account_no);
             while(rs.next())
@@ -257,7 +264,7 @@ public double getBalance(int account_no,String type){
     String value ="";
     try {
         Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
         PreparedStatement stmt = null;
         String query1 = "SELECT * FROM bank.acc_user where accuser=? and acctype=?";
         stmt = conn.prepareStatement(query1);
@@ -279,7 +286,7 @@ public double getBalance(int account_no,String type){
 public boolean updateBalance(int accountno_1,int accountno_2,double value,String type){
     try{
     Class.forName("com.mysql.cj.jdbc.Driver");
-    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "springUser", "ooadProj@123");
+    Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/bank", "anushka", "anushka");
     PreparedStatement stmt = null;
     PreparedStatement stmt2 = null;
         double user_bal = getBalance(accountno_1,"Savings");

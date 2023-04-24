@@ -34,8 +34,8 @@ public class ProjectController {
     {
       int db_accuser = u.getAccount_no();
       String db_pwduser = u.getPassword();
-      // System.out.println(db_accuser + db_pwduser);
-      // System.out.println("Input " + user.getAccount_no() + user.getPassword());
+       System.out.println(db_accuser + db_pwduser);
+       System.out.println("Input " + user.getAccount_no() + user.getPassword());
       if (user.getAccount_no() == db_accuser && user.getPassword().equals(db_pwduser))
       {
         //Redirect to home page
